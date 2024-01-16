@@ -28,6 +28,28 @@ export async function GET(){
     return NextResponse.json({res})
 }
 
+export async function POST(req){
+    const body = await req.json()
+    const message = body.messages
+    const res = await openai.chat.completions.create({
+        model:'gpt-3.5-turbo',
+        messages:[
+            {
+                role:"system",
+                content:"You are Kobe Bryant"
+            },
+            {
+                role:"user",
+                content:message
+            }
+        ],
+        temperature:0.7
+    })
+
+    const data = res.choices[0].message.content
+    return Response.json({data})
+
+}
 
 // export async function GET(){
 //     const res = await fetch('https://cat-fact.herokuapp.com/facts',{
