@@ -28,10 +28,11 @@ export async function POST(req){
           }
           )
         const addContext = await retriever.getRelevantDocuments(data)
+        console.log(addContext)
 
         const systemTemplate = "You are a Chinese Zodiac Fortune Teller."
         const humanTemplate = `
-        Answer the user's question with some helpful context. Break down the context given.
+        Answer the user's question with some context provided below. 
           <user>
               {data}
           </user> 
